@@ -1,11 +1,7 @@
 MIT License
 
 Copyright (c) 2026 小黄, 动动枪
-  — OpenMOSS (https://github.com/uluckyXH/OpenMOSS)
-  — 本项目为其衍生作品（fork），包含原项目受版权保护的代码。
-
 Copyright (c) 2026 墨戏生花 (Moxi) contributors
-  — 短剧创作相关的扩展、改造与新增模块。
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,16 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## 上游项目 / Upstream
-
-本项目的核心多 Agent 协作架构源自 **OpenMOSS**：
-
-- 仓库：https://github.com/uluckyXH/OpenMOSS
-- 作者：小黄、动动枪
-- 许可：MIT License
-
-我们保留并遵守上游的 MIT 许可条款。墨戏生花在其之上新增了短剧剧本创作领域的工作流、
-领域模型与前端界面。详见 [README.md](README.md) 的「致谢」章节。
