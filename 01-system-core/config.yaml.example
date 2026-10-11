@@ -1,0 +1,390 @@
+admin:
+  password: 'bcrypt:CHANGE_ME'
+agent:
+  allow_registration: true
+  registration_token: 'CHANGE_ME'
+ai:
+  api_key: 'YOUR_API_KEY_HERE'
+  base_url: https://api.moonshot.cn
+  model: kimi-k2.5
+  provider: kimi
+database:
+  path: ./data/tasks.db
+  type: sqlite
+model_providers:
+  anthropic:
+    api_key: ''
+    available_models:
+    - claude-3-5-sonnet-20241022
+    - claude-3-opus-20240229
+    - claude-3-haiku-20240307
+    base_url: https://api.anthropic.com
+    default_model: claude-3-5-sonnet-20241022
+    is_default: false
+    name: Anthropic Claude
+    provider_type: anthropic
+    rate_limit_rpm: 60
+    rate_limit_tpm: 80000
+  kimi:
+    api_key: 'YOUR_API_KEY_HERE'
+    available_models:
+    - moonshot-v1-128k
+    - moonshot-v1-32k
+    - moonshot-v1-8k
+    - moonshot-v1-auto
+    - kimi-k2.5
+    base_url: https://api.moonshot.cn
+    default_model: moonshot-v1-128k
+    is_default: true
+    name: Kimi (月之暗面)
+    provider_type: openai
+    rate_limit_rpm: 60
+    rate_limit_tpm: 128000
+  openai:
+    api_key: ''
+    available_models:
+    - gpt-4
+    - gpt-4-turbo
+    - gpt-3.5-turbo
+    base_url: https://api.openai.com
+    default_model: gpt-4
+    is_default: false
+    name: OpenAI
+    provider_type: openai
+    rate_limit_rpm: 60
+    rate_limit_tpm: 90000
+notification:
+  channels: []
+  enabled: false
+  events:
+  - task_completed
+  - review_rejected
+  - all_done
+  - patrol_alert
+project:
+  name: 墨戏生花
+rag:
+  knowledge_chunks:
+    # 本地 SQLite knowledge_chunks 召回。默认只读注入，不触发自动重建。
+    # 先进入已有 rag_* 槽位，避免改动 prompt 模板结构。
+    enabled: true
+    step_bindings:
+      beat_sheet:
+      - doc_types:
+        - rule
+        - skill
+        header: '# 本地节拍/爽点知识分块参考'
+        inject_as: rag_beat_references
+        max_chars: 1800
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        top_k: 3
+      characters:
+      - doc_types:
+        - rule
+        - skill
+        header: '# 本地人设/台词知识分块参考'
+        inject_as: rag_character_references
+        max_chars: 1800
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 3
+      script_draft:
+      - doc_types:
+        - rule
+        - skill
+        header: '# 本地规则/技能知识分块参考'
+        inject_as: rag_script_references
+        max_chars: 2400
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        - draft_episode
+        top_k: 4
+      quality_check:
+      - doc_types:
+        - rule
+        - skill
+        header: '# 本地审稿/质量知识分块参考'
+        inject_as: rag_review_references
+        max_chars: 2000
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - draft_episode
+        top_k: 4
+  dify:
+    api_key: 'YOUR_DATASET_KEY_HERE'
+    base_url: http://localhost
+    # 用户项目/角色/剧本事实源默认只落 DB + 用户工作区目录。
+    # 只有确认外部知识库具备租户隔离能力时，才手动改为 true。
+    allow_private_project_writes: false
+    datasets:
+      asset_library: b6a8f5b9-1261-494b-8b19-9fd70db47ec7
+      asset_library_hq: e2f9deaa-c5a4-4c50-a517-5b5cb0b9e785
+      manga_platform_rules_2026: e2f9deaa-c5a4-4c50-a517-5b5cb0b9e785
+      market_signals: 8ef46787-d36c-4007-99e7-4f346ebe9e5b
+      market_signals_hq: 8ef46787-d36c-4007-99e7-4f346ebe9e5b
+      moxi_scripts: f79a51e8-fc25-40e0-8655-d5f5ff2d144f
+      satisfaction_taxonomy_45: e2f9deaa-c5a4-4c50-a517-5b5cb0b9e785
+      tutorial_case_patterns: e2f9deaa-c5a4-4c50-a517-5b5cb0b9e785
+      writing_tutorials_2026: e2f9deaa-c5a4-4c50-a517-5b5cb0b9e785
+    search_method: semantic_search
+    step_bindings:
+      beat_sheet:
+      - dataset: satisfaction_taxonomy_45
+        header: '# 45种爽点卡参考（只借爽点机制）'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        top_k: 5
+      - dataset: moxi_scripts
+        header: '# 同赛道节拍/结构参考'
+        inject_as: rag_beat_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        top_k: 5
+      characters:
+      - dataset: writing_tutorials_2026
+        header: '# 2026人设/台词方法参考'
+        inject_as: rag_character_references
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 3
+      - dataset: moxi_scripts
+        header: '# 同赛道人物设定参考'
+        inject_as: rag_character_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        top_k: 5
+      - dataset: asset_library_hq
+        header: '# 高分人设/桥段'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        top_k: 4
+      concept:
+      - dataset: writing_tutorials_2026
+        header: '# 2026编剧教程参考（选题/IP/开场/主线，仅借方法）'
+        inject_as: rag_market_signals
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 4
+      - dataset: moxi_scripts
+        header: '# 爆款剧本参考（同赛道样本）'
+        inject_as: rag_script_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 6
+      - dataset: asset_library_hq
+        header: '# 高分桥段/人设参考'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 5
+      - dataset: market_signals_hq
+        header: '# 市场信号参考'
+        inject_as: rag_market_signals
+        query_fields:
+        - genre_main
+        - genre_sub
+        - audience_axis
+        top_k: 4
+      episode_outlines:
+      - dataset: manga_platform_rules_2026
+        header: '# 2026漫剧结构/阶段规则参考'
+        inject_as: rag_asset_references
+        query_fields:
+        - project_type
+        - audience_axis
+        - genre_main
+        - genre_sub
+        top_k: 4
+      - dataset: moxi_scripts
+        header: '# 同赛道爆款全季骨架参考（仅借鉴节拍分布/集尾倒钩/付费墙节奏，禁止照搬具体情节）'
+        inject_as: rag_script_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        - brief
+        top_k: 8
+      - dataset: asset_library_hq
+        header: '# 高分桥段池（用于丰富每集 main_event/cliffhanger 多样性）'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - genre_main
+        - genre_sub
+        top_k: 6
+      market_check:
+      - dataset: writing_tutorials_2026
+        header: '# 2026选题/IP判断教程'
+        inject_as: rag_market_signals
+        query_fields:
+        - genre_main
+        - genre_sub
+        - audience_axis
+        - brief
+        top_k: 4
+      - dataset: market_signals_hq
+        inject_as: rag_market_signals
+        query_fields:
+        - genre_main
+        - genre_sub
+        - audience_axis
+        top_k: 6
+      novel_analysis:
+      - dynamic_dataset: novel_{project_id}
+        inject_as: rag_novel_chapters
+        query_fields:
+        - draft_episode
+        - brief
+        top_k: 8
+      quality_check:
+      - dataset: manga_platform_rules_2026
+        header: '# 2026漫剧质量清单参考'
+        inject_as: rag_review_references
+        query_fields:
+        - project_type
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - draft_episode
+        top_k: 4
+      - dataset: tutorial_case_patterns
+        header: '# 2026反面案例/结构范式参考'
+        inject_as: rag_review_references
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - draft_episode
+        top_k: 4
+      - dataset: moxi_scripts
+        header: '# 同位置爆款基线（评审参考）'
+        inject_as: rag_review_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - draft_episode
+        top_k: 4
+      script_draft:
+      - dataset: satisfaction_taxonomy_45
+        header: '# 45种爽点卡参考（按当前集位置召回）'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - draft_episode
+        - genre_main
+        - episode_summary
+        - episode_conflict
+        top_k: 3
+        score_threshold: 0.25
+      - dataset: writing_tutorials_2026
+        header: '# 2026写作教程参考（开场/台词/节奏）'
+        inject_as: rag_script_references
+        query_fields:
+        - audience_axis
+        - genre_main
+        - genre_sub
+        - draft_episode
+        - episode_summary
+        - episode_conflict
+        top_k: 3
+        score_threshold: 0.2
+      - dataset: moxi_scripts
+        header: '# 爆款剧本参考（同赛道样本）'
+        inject_as: rag_script_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - draft_episode
+        - genre_main
+        - episode_summary
+        - episode_conflict
+        - episode_hook
+        - character_names
+        top_k: 3
+        score_threshold: 0.3
+      - dataset: asset_library_hq
+        header: '# 高分桥段参考'
+        inject_as: rag_asset_references
+        query_fields:
+        - audience_axis
+        - subgenre_track
+        - draft_episode
+        - episode_summary
+        - episode_hook
+        - character_names
+        top_k: 3
+        score_threshold: 0.3
+    timeout: 8.0
+server:
+  external_url: http://127.0.0.1:6565
+  host: 0.0.0.0
+  port: 6565
+security:
+  cors:
+    allowed_origins:
+      - http://localhost:5173
+      - http://127.0.0.1:5173
+      - http://localhost:6565
+      - http://127.0.0.1:6565
+    allow_origin_regex: '^https?://(localhost|127\.0\.0\.1|\[::1\]):\d+$'
+  model_base_url:
+    allow_insecure: false
+setup:
+  initialized: true
+text_generation:
+  api_key: 'YOUR_API_KEY_HERE'
+  base_url: https://api.moonshot.cn
+  enabled: true
+  endpoint: /v1/chat/completions
+  model: moonshot-v1-128k
+  provider: kimi
+  ssl_verify: true
+  temperature: 0.7
+  timeout_seconds: 120
+webui:
+  feed_retention_days: 7
+  public_feed: false
+workspace:
+  root: ./03-project-library/new-projects

@@ -1,0 +1,21 @@
+# 创作流水线配置（示例）
+
+[pipeline]
+name = "short_drama_pipeline_example"
+
+# ── 项目类型 ──
+# 用于选择激活哪些规则分支
+# "短剧-男频" / "短剧-女频" / "短剧-混合" / "小说IP改编"
+
+# ── 知识库引用 ──
+[knowledge]
+opening_formulas    = "prompts/knowledge/opening_formulas.md"
+satisfaction_matrix = "prompts/knowledge/satisfaction_matrix.md"
+
+# ── 步骤定义 ──
+[steps]
+concept     = "prompts/steps/01_concept.md"
+characters  = "prompts/steps/02_characters.md"
+beat_sheet  = "prompts/steps/03_beat_sheet.md"
+scene_list  = "prompts/steps/04_scene_list.md"
+script      = "prompts/steps/05_script_draft.md"

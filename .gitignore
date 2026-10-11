@@ -1,0 +1,76 @@
+# ============ 系统 / 编辑器 ============
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# ============ Python ============
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+01-system-core/.venv/
+
+# ============ Node / 前端构建 ============
+node_modules/
+01-system-core/webui/node_modules/
+01-system-core/webui/dist/
+01-system-core/static/
+.cache/
+
+# ============ 数据库与运行数据 ============
+# 运行期产生的数据一律不入库；引擎只带示例规则包。
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+01-system-core/data/
+01-system-core/agent_team.db*
+01-system-core/moxi_agents.db*
+
+# ============ 密钥 / 配置（绝对不能提交）============
+01-system-core/config.yaml
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# ============ 运行时产物 ============
+*.log
+01-system-core/server.log
+output/
+01-system-core/scripts/_ab_out/
+
+# ============ 用户工作区 / 生成产物 ============
+# 03-project-library 只保留目录结构与说明，实际项目数据属用户私有。
+03-project-library/new-projects/
+03-project-library/*/workspace/
+03-project-library/*/output/
+03-project-library/墨戏生花验收/
+
+# ============ 临时 / 备份 ============
+*.bak
+*.tmp
+*.before_cleanup_*
+
+# ============ 本地工具状态 ============
+.playwright-cli/
+.gstack/
+.codegraph/
+.claude/local/
+.claude/worktrees/
+.claude/settings.local.json
