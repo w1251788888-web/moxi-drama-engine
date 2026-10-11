@@ -6,56 +6,27 @@
 
 面向短剧剧本创作的开源 AI 工作流引擎
 
-把「灵感 → 大纲 → 人物 → 分集 → 分场 → 剧本 → 质检 → 合规 → 交付」
-整条创作链路，做成可编排、可回溯、可协作的工程化流水线。
+<br />
+
+把「灵感 → 大纲 → 人物 → 分集 → 分场 → 剧本 → 质检 → 合规 → 交付」整条创作链路，做成可编排、可回溯、可协作的工程化流水线。
 
 <br />
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Based on OpenMOSS](https://img.shields.io/badge/based%20on-OpenMOSS-8b5cf6)](https://github.com/uluckyXH/OpenMOSS)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104%2B-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Node](https://img.shields.io/badge/Node-%E2%89%A520.19-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://sqlite.org/)
 
-<TABLE>
-<tr>
-<td align="center" width="25%">
+<br />
 
-**🧩 分段渐进**
+**🧩 分段渐进** · **🤝 贡献追踪** · **🎛 多模型** · **🔌 规则即插即用**
 
-场景级写作，断点续作
+<br />
 
-</td>
-<td align="center" width="25%">
-
-**🤝 贡献追踪**
-
-人机贡献一目了然
-
-</td>
-<td align="center" width="25%">
-
-**🎛 多模型**
-
-一个接口调度多家模型
-
-</td>
-<td align="center" width="25%">
-
-**🔌 规则即插即用**
-
-引擎与领域知识解耦
-
-</td>
-</tr>
-</TABLE>
-
-[**开始使用**](#-快速开始) · [**架构设计**](#-架构) · [**接入自己的规则**](#-接入自己的规则) · [**深入阅读**](#-文档) · [**贡献代码**](#-贡献)
+[开始使用](#-快速开始) · [架构设计](#-架构) · [接入自己的规则](#-接入自己的规则) · [文档](#-文档) · [贡献代码](#-贡献)
 
 </div>
 
@@ -67,36 +38,25 @@
 
 它不是一个「输入一句话、吐出一整部剧本」的黑盒生成器，而是一套**把长文本创作拆成可管理步骤**的工程系统 —— 每一步都有明确的输入契约、可验证的产出、可回退的断点，以及 AI 与人类各自的贡献记录。
 
-<br />
+### 🙏 本项目基于 OpenMOSS 定制
 
-> ### 🙏 本项目基于 OpenMOSS 定制
->
-> 墨戏生花的**多 Agent 协作内核**源自开源项目 **[OpenMOSS](https://github.com/uluckyXH/OpenMOSS)**
-> （MIT License，作者：小黄、动动枪）。
->
-> 我们在其之上实现了**短剧剧本创作**领域的工作流编排、领域模型与前端界面。
-> 上游的版权与许可声明已完整保留于 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)，谨此致谢。
->
+墨戏生花的**多 Agent 协作内核**源自开源项目 **[OpenMOSS](https://github.com/uluckyXH/OpenMOSS)**（MIT License，作者：小黄、动动枪）。
+
+我们在其之上实现了**短剧剧本创作**领域的工作流编排、领域模型与前端界面。上游的版权与许可声明已完整保留于 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)，谨此致谢。
+
 > 如果你需要的是通用多 Agent 协作平台，请直接使用上游项目。
 
-<br />
+### ⚙️ 引擎开源，规则自持
 
-> ### ⚙️ 引擎开源，规则自持
->
-> 本仓库提供完整的**创作引擎**（后端 / 前端 / 工作流编排）。
->
-> 所有创作方法论 —— 写作规则、钩子库、爽感矩阵、题材配方 —— 均以**可插拔的规则包**形式接入，**不包含在本仓库内**。
-> 仓库自带一份通用示例规则包用于体验，你可以随时替换为自己的规则包。
->
-> 👉 详见 [**接入自己的规则**](#-接入自己的规则)
+本仓库提供完整的**创作引擎**（后端 / 前端 / 工作流编排）。
+
+所有创作方法论 —— 写作规则、钩子库、爽感矩阵、题材配方 —— 均以**可插拔的规则包**形式接入，**不包含在本仓库内**。仓库自带一份通用示例规则包用于体验，你可以随时替换为自己的规则包。
+
+👉 详见 [**接入自己的规则**](#-接入自己的规则)
 
 ---
 
 ## ✨ 核心特性
-
-<table>
-<tr>
-<td width="50%" valign="top">
 
 ### 🧩 分段渐进写作
 
@@ -106,55 +66,43 @@
 - 自动加载前文上下文，避免「失忆」
 - 长剧本不再受单次模型上下文长度限制
 
-</td>
-<td width="50%" valign="top">
-
 ### 🤝 人机贡献度追踪
 
 清楚记录**谁写了什么**：
 
-- **人工编辑** —— 编辑次数、增减字数
-- **AI 生成** —— 接受 / 修改 / 拒绝率
-- **Skill 调用** —— 各技能使用频次
-- **可视化** —— 饼图 / 热力图
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
+| 维度 | 记录内容 |
+|---|---|
+| **人工编辑** | 编辑次数、增减字数 |
+| **AI 生成** | 生成内容、接受 / 修改 / 拒绝率 |
+| **Skill 调用** | 各技能使用频次 |
+| **可视化** | 饼图 / 热力图展示贡献分布 |
 
 ### 🔁 版本控制与 Diff
 
 每个创作步骤都留痕，支持内容版本历史与差异对比，改坏了随时回溯。
 
-</td>
-<td width="50%" valign="top">
-
 ### 🎛 多模型可切换
 
 一个接口统一调度多家模型，按任务灵活分配，无需改代码。
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
+| 类型 | 支持情况 |
+|---|---|
+| **OpenAI 兼容** | OpenAI、DeepSeek、Kimi（月之暗面）、以及任意兼容端点 |
+| **Anthropic** | Claude 系列 |
+
+模型、密钥、限流均在配置中声明 —— 见 [`config.yaml.example`](01-system-core/config.yaml.example)。
 
 ### 🛡 质量门与合规审查
 
-- **多维度质检评分** —— 结构化评估生成内容
+- **多维度质检评分** —— 对生成内容做结构化评估
 - **红线合规检测** —— 敏感内容识别与拦截
-- **链路完整性校验** —— 上下集承接不丢失
+- **链路完整性校验** —— 确保上下集承接不丢失
 
-</td>
-<td width="50%" valign="top">
+> 评分与合规的**判定规则**同样来自可插拔规则包。
 
 ### 📚 RAG 知识库
 
 支持接入外部知识库，让生成有据可依。领域知识以规则包形式挂载，与引擎解耦。
-
-</td>
-</tr>
-</table>
 
 ### 🤖 多 Agent 协作
 
@@ -167,14 +115,9 @@
 | **Reviewer** | 评审员 | 审查产出质量，给出修改意见 |
 | **Patrol** | 巡逻员 | 监控系统健康与任务流转 |
 
-### 🧠 支持的模型
+### 🔌 Skill 插件体系
 
-| 类型 | 支持情况 |
-|---|---|
-| **OpenAI 兼容** | OpenAI、DeepSeek、Kimi（月之暗面）、以及任意兼容端点 |
-| **Anthropic** | Claude 系列 |
-
-模型、密钥、限流均在配置中声明 —— 见 [`config.yaml.example`](01-system-core/config.yaml.example)。
+创作能力以 Skill 形式扩展，引擎与具体领域知识解耦。
 
 ---
 
@@ -237,13 +180,11 @@ flowchart TB
     API --> FS
 ```
 
-<br />
-
-**关键设计 —— 规则与引擎完全解耦**
+### 关键设计 —— 规则与引擎完全解耦
 
 引擎通过 `01-system-core/prompts/` 这一「兼容入口」读取规则，其下 `rules` / `steps` / `agents` / `knowledge` / `templates` 均为**指向规则包的符号链接**：
 
-```
+```text
 01-system-core/prompts/
 ├── rules     ──▶  ../../02-creation-rules/core-rules
 ├── steps     ──▶  ../../02-creation-rules/step-definitions
@@ -319,8 +260,6 @@ npm run build
 
 构建产物由后端统一托管，直接访问 http://127.0.0.1:6565 即可。
 
-<br />
-
 > 💡 仓库 `07-launch-tools/` 提供了 macOS 一键启动脚本（`start.command` / `dev-mode.command`），可双击运行。
 
 ---
@@ -331,7 +270,9 @@ npm run build
 
 ### 为什么规则要独立
 
-短剧创作的核心竞争力在于**方法论**：怎样的开场抓人、钩子如何埋设、爽点怎么排布、不同受众偏好的节奏差异。这些是领域知识资产，而非通用工程代码。把它们与引擎耦合，会导致：
+短剧创作的核心竞争力在于**方法论**：怎样的开场抓人、钩子如何埋设、爽点怎么排布、不同受众偏好的节奏差异。这些是领域知识资产，而非通用工程代码。
+
+把它们与引擎耦合，会导致：
 
 | 问题 | 后果 |
 |---|---|
@@ -345,7 +286,7 @@ npm run build
 
 引擎期望在仓库根目录存在 `02-creation-rules/`：
 
-```
+```text
 02-creation-rules/
 ├── core-rules/           # 核心写作规则（格式规范、写作逻辑、节奏控制…）
 ├── step-definitions/     # 各创作步骤定义（概念、人物、节拍表、分场…）
@@ -354,22 +295,13 @@ npm run build
 └── templates/            # 提示词模板
 ```
 
-### 两种用法
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-#### 方式 A —— 使用内置示例包
+### 方式 A —— 使用内置示例包
 
 仓库自带一份**通用示例规则包**，足以跑通完整链路，用于体验引擎能力。
 
 > ⚠️ 它不是生产级方法论，请按需替换。
 
-</td>
-<td width="50%" valign="top">
-
-#### 方式 B —— 接入自己的规则包
+### 方式 B —— 接入自己的规则包
 
 ```bash
 # 移除示例包
@@ -379,11 +311,7 @@ rm -rf 02-creation-rules
 git submodule add <your-rules-repo> 02-creation-rules
 ```
 
-只要目录结构符合约定，引擎即可加载，**无需改动任何代码**。
-
-</td>
-</tr>
-</table>
+只要目录结构符合约定，引擎即可正常加载，**无需改动任何代码**。
 
 > 🔒 **建议**：生产规则包放在**私有仓库**，以 `git submodule` 或部署时挂载的方式接入。
 
@@ -396,9 +324,7 @@ git submodule add <your-rules-repo> 02-creation-rules
 <details>
 <summary><b>点击展开完整目录结构</b></summary>
 
-<br />
-
-```
+```text
 moxi-drama-engine/
 │
 ├── 01-system-core/              系统核心：后端 + 前端
@@ -460,11 +386,6 @@ flowchart LR
     style I fill:#f6f1e8,stroke:#b23a2c,stroke-width:2px
 ```
 
-<details>
-<summary><b>各步骤说明</b></summary>
-
-<br />
-
 | # | 步骤 | 产出 |
 |:---:|---|---|
 | 1 | **概念规划** | Logline、核心卖点、核心冲突、题材标签 |
@@ -475,8 +396,6 @@ flowchart LR
 | 6 | **质检评分** | 多维度结构化评分 |
 | 7 | **合规审查** | 红线检测结果 |
 | 8 | **导出交付** | Word / txt |
-
-</details>
 
 ---
 
@@ -500,8 +419,6 @@ flowchart LR
 <details>
 <summary><b>点击展开主要接口</b></summary>
 
-<br />
-
 | 方法 | 路径 | 说明 |
 |:---:|---|---|
 | `POST` | `/api/v2/projects/` | 创建项目 |
@@ -512,9 +429,7 @@ flowchart LR
 
 </details>
 
-<br />
-
-> 完整接口以运行后的 Swagger 文档（[`/docs`](http://127.0.0.1:6565/docs)）为准。
+完整接口以运行后的 Swagger 文档（`/docs`）为准。
 
 ---
 
@@ -548,11 +463,9 @@ flowchart LR
 
 请先阅读 [**CONTRIBUTING.md**](CONTRIBUTING.md)。三条核心约定：
 
-| | 约定 |
-|:---:|---|
-| ✅ | 提交前跑通测试：`cd 01-system-core && pytest` |
-| ✅ | 前端改动确保 `npm run type-check` 与 `npm run lint` 通过 |
-| ❌ | **请勿提交任何私有规则包内容、真实 API 密钥或本地绝对路径** |
+- ✅ 提交前跑通测试：`cd 01-system-core && pytest`
+- ✅ 前端改动确保 `npm run type-check` 与 `npm run lint` 通过
+- ❌ **请勿提交任何私有规则包内容、真实 API 密钥或本地绝对路径**
 
 ---
 
@@ -562,7 +475,7 @@ flowchart LR
 
 | 项目 | 说明 |
 |---|---|
-| [**OpenMOSS**](https://github.com/uluckyXH/OpenMOSS) | **多 Agent 协作内核**。作者：小黄、动动枪。MIT License。<br />墨戏生花的任务编排、Agent 调度与后台管理架构均构建于此 |
+| [**OpenMOSS**](https://github.com/uluckyXH/OpenMOSS) | **多 Agent 协作内核**。作者：小黄、动动枪。MIT License。墨戏生花的任务编排、Agent 调度与后台管理架构均构建于此 |
 | [OpenClaw](https://github.com/openclaw/openclaw) | Agent 运行与唤醒机制 |
 | [FastAPI](https://fastapi.tiangolo.com/) · [Vue 3](https://vuejs.org/) · [Vite](https://vitejs.dev/) · [TailwindCSS](https://tailwindcss.com/) | 技术栈基石 |
 
@@ -574,7 +487,7 @@ flowchart LR
 
 本项目采用 **[MIT License](LICENSE)**，与上游 OpenMOSS 保持一致。
 
-```
+```text
 Copyright (c) 2026 小黄, 动动枪                  — OpenMOSS
 Copyright (c) 2026 墨戏生花 (Moxi) contributors  — 短剧创作扩展
 ```
@@ -587,8 +500,6 @@ Copyright (c) 2026 墨戏生花 (Moxi) contributors  — 短剧创作扩展
 ---
 
 <div align="center">
-
-<br />
 
 **墨戏生花**
 
